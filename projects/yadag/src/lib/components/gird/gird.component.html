@@ -1,0 +1,55 @@
+<div class="row justify-content-between">
+
+  <div class="col-sm-12 col-md-8 pl-4">
+    <h4 style="text-transform: capitalize;">{{heading}}</h4>
+  </div>
+
+  <div class="col-sm-12 col-md-4 text-right pr-4">
+
+    <gird-filter [requested-uniq-vals]="requestedUniqueValues" [columns]="columns" [filter-id]="girdId"
+      (on-filter-criteria-change)="appendFilterCriteria($event)" 
+      (on-clear-all-filters)="onClearAllFilters()"
+      (on-unique-val-req)="onUniqueValueRequestHandler($event)">
+    </gird-filter>
+    
+    <gird-sort [source-data]="reportData" [source-columns]="columns" (onDataSorted)="onDataSortHandler($event)" *ngIf="showSorting"></gird-sort>
+    <col-popup [source-columns]="columns" ></col-popup>
+    <button class="btn btn-outline-dark btn-sm" (click)="exportCSVClickHandler()" *ngIf="showDownload">
+      <span class="fas fa-download"></span>
+    </button>
+    <button class="btn btn-success btn-sm" (click)="onAddBtnClickHandler()" *ngIf="showAddButton">
+      <span class="fas fa-plus"></span>
+    </button>
+  </div>
+</div>
+<div class="row justify-content-center" *ngIf="showQuickSearch">
+  <div class="col-12 col-sm-6 col-md-4 mb-2 mt-2">
+    <div class="input-group">
+        <input class="form-control" style="border-right: 1px solid white;" id="gird-quick-search" placeholder="quick search" 
+        (keyup)="onQuickSearchChangeHandler($event)"/>
+        <div class="input-group-append" >
+            <span class="input-group-text bg-white fa fa-search text-secondary" style="border-left: 1px solid white;"></span>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 pl-4 text-primary" [hide]="!isSorted">
+    <strong>Sorted By: </strong>{{sortByState}}
+  </div>
+  <div class="col-12 pl-4 text-primary" [hide]="!isFiltered">
+    <strong>Filtered By: </strong>{{filterByState}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <gird-table [columns]="columns" [table-css-classes]="tableCSS" [rows]="reportRows"
+      (on-column-click)="onColumnClickHandler($event)" [row-tracking-id]="trackerId"></gird-table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <gird-page [hide]="!enablePaging" [rows-count]="rowsCount" [rows-per-page]="rowsPerPage" (onPageChange)="onPageChangeHandler($event)"></gird-page>
+  </div>
+</div>

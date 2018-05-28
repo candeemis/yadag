@@ -1,0 +1,78 @@
+<div class="row justify-content-sm-center">
+  <div class="col-12">
+    <table class="{{tableClasses}}">
+      <thead >
+        <tr>
+          <th *ngFor="let col of columns" [hide]="!col.visible" [ngClass]="{'th-vertical':col.isVertical}" 
+          [ngStyle]="{'min-width':col.minWidth?col.minWidth:'0px','max-width':col.maxWidth?col.maxWidth:'auto'}">
+            <!-- [ngClass]="{'th-vertical':col.isVertical}" -->
+            <div>
+              {{col.title}}
+            </div>
+          </th>
+        </tr>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="let row of sourceRows; trackBy: trackerFunc">
+              <ng-template ngFor let-col [ngForOf]="columns">
+                <ng-container *ngIf="col.visible" [ngSwitch]="col.dataType" >
+  
+                    <td *ngSwitchCase="AnchorDataType">
+                        <a 
+                        routerLink="{{row.anchors.get(col.dataProperty).url}}">
+                          {{row.anchors.get(col.dataProperty).text}}
+                        </a>
+                    </td>
+  
+                    <td *ngSwitchCase="PopupDataType" container="body" placement="top" triggers="mouseenter:mouseleave"
+                    [popover]="row.anchors.get(col.dataProperty).text">
+  
+                      <ng-container [ngSwitch]="row.anchors.get(col.dataProperty).display">
+  
+                        <a *ngSwitchCase="'anchor'" routerLink="{{row.anchors.get(col.dataProperty).url}}">
+                            {{row.anchors.get(col.dataProperty).text}}
+                        </a>
+  
+                        <span *ngSwitchCase="'plain'">
+                            {{row.anchors.get(col.dataProperty).text}}
+                        </span>
+  
+                        <span *ngSwitchCase="'symbol'">
+                            <span *ngIf="row.anchors.get(col.dataProperty).hasValue"
+                              [ngClass]="row.anchors.get(col.dataProperty).fontClasses">
+                            </span>
+                        </span>
+  
+                      </ng-container>
+                    </td>
+  
+                    <td *ngSwitchCase="DateDataType">
+                        {{row[col.dataProperty]?momentFunc(row[col.dataProperty]).format('ll'):null}}
+                    </td>
+  
+                    <td *ngSwitchCase="ButtonDataType">
+                        <span
+                        [ngClass]="row.anchors.get(col.dataProperty).fontClasses"
+                        (click)="emitClickOnColumn(row.anchors.get(col.dataProperty).param, col.dataProperty)">
+                        </span>
+                    </td>
+                    <td *ngSwitchCase="BoolDataType">
+                        {{row[col.dataProperty]?"Active":"Inactive"}}
+                    </td>
+                    <td *ngSwitchDefault>
+                        {{row[col.dataProperty]}}
+                    </td>
+  
+                </ng-container>
+              </ng-template>
+            </tr>
+            <tr *ngIf="sourceRows.length==0">
+              <td class="text-muted" [colSpan]="columns.length">
+                0 items
+              </td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

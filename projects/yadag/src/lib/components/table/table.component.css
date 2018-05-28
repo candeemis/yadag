@@ -1,0 +1,80 @@
+.drop-button{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -ms-appearance: button;
+    -o-appearance: button;
+}
+
+.data-table {
+    box-shadow: 0 0 15px rgb(236, 236, 236);
+    table-layout: fixed;
+    font-size: 0.96em;
+}
+.blue-header{
+    background-color: #04a2ca;
+	border-color: #030505;
+	color: #fff;
+}
+
+table tbody tr td a{
+    color: #06a1ca;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+table tbody tr td a:hover{
+    color: #88da4a;
+}
+
+th{
+    padding-left: 1em;
+    padding-right: 1em;
+    vertical-align: middle !important;
+}
+
+.th-truncate{
+    max-width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.th-vertical{    
+    font-weight: normal;
+    padding: unset;
+    width: 51px;
+    max-width: 51px;
+    height: 200px;
+    vertical-align: bottom !important;
+}
+
+.th-vertical div{
+    transform: rotate(-90deg) translate(50%, 0);
+    white-space: nowrap;
+}
+
+td{
+    padding-left: 1em;
+    padding-right: 1em;
+    vertical-align: middle;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.vertical-direction{
+    writing-mode:tb-rl;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform: rotate(90deg);
+    white-space:nowrap;
+    display:block;
+    bottom:0;
+    width:20px;
+    height:20px;
+}
+

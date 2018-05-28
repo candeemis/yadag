@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+body{	
+	width:100%;
+	color:#444;
+	background-color: #e0e0e0;
+	}

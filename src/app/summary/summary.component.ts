@@ -157,8 +157,9 @@ export class SummaryComponent implements OnInit {
         }
       });
 
-      let task1Class = row.task1Status===1?'fas fa-check text-success':'fas fa-tasks text-primary';
+      
       //setting up symbol with popup column
+      let task1Class = row.task1Status===1?'fas fa-check text-success':'fas fa-tasks text-primary';
       row.anchors.set('task1Status', {
         dataType: ColDataType.Popup,
         text: row.task1Status,

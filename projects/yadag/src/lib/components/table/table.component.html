@@ -73,6 +73,13 @@
               </td>
             </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th *ngFor="let col of footerRow.cols">
+            {{footerRow.valuesMap.get(col)}}
+          </th>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>

@@ -26,10 +26,10 @@ export class TableComponent implements OnInit {
 
   momentFunc = moment;
   
-  constructor() { 
-    
-  }
-
+  @Input('footer-row') footerRow: {
+    cols: string[],
+    valuesMap: Map<string, string>
+  };
 
   ngOnInit() {
     this.stringCriteriaMap.set(Criteria.EqualsTo,"Equals To");

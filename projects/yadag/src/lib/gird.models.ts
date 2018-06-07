@@ -6,6 +6,7 @@ export interface Column{
     isVertical:boolean;    
     minWidth:string;
     maxWidth:string;
+    footerValue: string;
   }
 
 export enum ColDataType{

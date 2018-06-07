@@ -144,8 +144,7 @@ export class GirdComponent {
     this.summaryColMap.forEach((map, key) => {
       this.summaryRow.valuesMap.set(key, `${map.size}`);
     });
-    this.summaryRow.cols = this.columns.filter(f => f.visible)
-      .map(col => col.dataProperty);
+    this.summaryRow.cols = this.columns;
   }
 
   private countUniqueValues(map, col, row){

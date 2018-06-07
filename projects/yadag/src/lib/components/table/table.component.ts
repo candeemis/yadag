@@ -27,7 +27,7 @@ export class TableComponent implements OnInit {
   momentFunc = moment;
   
   @Input('footer-row') footerRow: {
-    cols: string[],
+    cols: any[],
     valuesMap: Map<string, string>
   };
 
@@ -37,9 +37,9 @@ export class TableComponent implements OnInit {
     this.dateCriteriaMap.set(Criteria.EqualsTo,"Equals To");
     
 
-    this.stringCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Equal To");
-    this.numberCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Equal To");
-    this.dateCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Equal To");
+    this.stringCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Not Equal To");
+    this.numberCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Not Equal To");
+    this.dateCriteriaMap.set(Criteria.DoesNotEqualTo,"Does Not Equal To");
     
 
     this.stringCriteriaMap.set(Criteria.Contains, "Contains");

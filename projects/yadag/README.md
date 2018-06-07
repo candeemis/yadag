@@ -13,6 +13,6 @@
 * Use your own Bootstrap V4 styles for the table
 * Gird Heading
 * Show hide toolbar buttons
-* Dynamic summary row in footer, which shows the count of distinct values in the column
+* Dynamic summary row in footer, for now it shows the count of distinct values in the corresponding column
 
 For details, How-To and issues, see the [Github Repository](https://github.com/nadeemjamali/yadag).

@@ -50,14 +50,9 @@ export class GirdComponent {
   }
   set filterByState(arg: string) {
     this._filterByState.push(arg);
-  }
+  }  
 
-  summaryRow = {
-    cols: [],
-    valuesMap: new Map<string, string>()
-  };
-
-  summaryColMap: Map<string, Map<string, number>>;
+  private summaryColMap: Map<string, Map<string, number>>;
   columnsCount: number = 0;
   /**
    * Data columns
@@ -132,7 +127,7 @@ export class GirdComponent {
   calculateSummary() {
 
     this.summaryColMap.forEach((map, key) => map.clear());
-    this.summaryRow.valuesMap = new Map<string, string>();
+    const summaryRow = new Map<string, string>();
     this.reportData.forEach(row => {
 
       this.summaryColMap.forEach((map, col) => {
@@ -141,11 +136,9 @@ export class GirdComponent {
 
     });
 
-    this.summaryColMap.forEach((map, key) => {
-      this.summaryRow.valuesMap.set(key, `${map.size}`);
+    this.columns.forEach(col => {
+      col.footerValue = `${this.summaryColMap.get(col.dataProperty).size}`;
     });
-    this.summaryRow.cols = this.columns.filter(f => f.visible)
-      .map(col => col.dataProperty);
   }
 
   private countUniqueValues(map, col, row){

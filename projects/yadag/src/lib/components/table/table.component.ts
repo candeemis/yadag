@@ -92,4 +92,13 @@ export class TableComponent implements OnInit {
     
     return obj? obj[this.trackerId]:undefined;
   }
+
+  getValOrDefault(obj, prop, def){
+    
+    if(obj && obj[prop]){
+      return obj[prop];
+    }
+    return def;
+  }
+
 }

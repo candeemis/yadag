@@ -26,26 +26,26 @@
                     </td>
   
                     <td *ngSwitchCase="PopupDataType" container="body" placement="top" triggers="mouseenter:mouseleave"
-                    [popover]="row.anchors.get(col.dataProperty).text">
+                    [popover]="getValOrDefault(row.anchors.get(col.dataProperty), 'text', '')">
   
-                      <ng-container [ngSwitch]="row.anchors.get(col.dataProperty).display">
+                    <ng-container [ngSwitch]="getValOrDefault(row.anchors.get(col.dataProperty), 'display', '')">
   
-                        <a *ngSwitchCase="'anchor'" routerLink="{{row.anchors.get(col.dataProperty).url}}">
-                            {{row.anchors.get(col.dataProperty).text}}
-                        </a>
-  
-                        <span *ngSwitchCase="'plain'">
-                            {{row.anchors.get(col.dataProperty).text}}
-                        </span>
-  
-                        <span *ngSwitchCase="'symbol'">
-                            <span *ngIf="row.anchors.get(col.dataProperty).hasValue"
-                              [ngClass]="row.anchors.get(col.dataProperty).fontClasses">
-                            </span>
-                        </span>
-  
-                      </ng-container>
-                    </td>
+                      <a *ngSwitchCase="'anchor'" routerLink="{{getValOrDefault(row.anchors.get(col.dataProperty),'url','')}}">
+                          {{row.anchors.get(col.dataProperty).text}}
+                      </a>
+
+                      <span *ngSwitchCase="'plain'">
+                          {{row.anchors.get(col.dataProperty).text}}
+                      </span>
+
+                      <span *ngSwitchCase="'symbol'">
+                          <span *ngIf="getValOrDefault(row.anchors.get(col.dataProperty),'hasValue',false)"
+                            [ngClass]="getValOrDefault(row.anchors.get(col.dataProperty),'fontClasses','')">
+                          </span>
+                      </span>
+
+                    </ng-container>
+                  </td>
   
                     <td *ngSwitchCase="DateDataType">
                         {{row[col.dataProperty]?momentFunc(row[col.dataProperty]).format('ll'):null}}

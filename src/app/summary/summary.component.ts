@@ -49,7 +49,8 @@ export class SummaryComponent implements OnInit {
       dataProperty: "active",
       visible: false,
       dataType: ColDataType.Bool,
-      maxWidth: '30px'
+      maxWidth: '30px',
+      aggregateFunc: this.countActives
     },
     {
       title: "Message",
@@ -194,6 +195,13 @@ export class SummaryComponent implements OnInit {
       this.data.push(row);
     };
 
+  }
+
+  countActives(map: Map<string, number>, col: string, row: any):void {
+    const colVal = row[col];
+    if(colVal){
+      map.set(`${map.size}`, 1);
+    }
   }
 
   onColumnClickHandler(eventData){

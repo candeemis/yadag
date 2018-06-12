@@ -15,5 +15,6 @@
 * Show hide toolbar buttons
 * Dynamic summary row in footer, by default it shows the count of distinct values of the corresponding column
 * Custom aggregation function supported
+* Emits the filtered and sorted data for your own logic
 
 For details, How-To and issues, see the [Github Repository](https://github.com/nadeemjamali/yadag).

@@ -20,5 +20,6 @@
   rows-per-page="15" enable-paging="true" 
   (on-btn-column-click)="onColumnClickHandler($event)"
   (on-add-btn-click)="addButtnClickHandler($event)"
+  (on-report-data-ready)="reportDataReadyHandler($event)"
     [row-tracking-id]="'id'">
   </dynamic-gird>

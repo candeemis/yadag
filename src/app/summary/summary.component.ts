@@ -209,10 +209,14 @@ export class SummaryComponent implements OnInit {
       return;
     }
 
-    //the object is being made invisible here, in real life execute your delete/remove logic properly.
+    // the object is being made invisible here, in real life execute your delete/remove logic properly.
     this.hiddinRows.set(eventData.id, '');
     console.log(`adding to hidden: ${eventData.id}`);
     this.populateData();
+  }
+
+  reportDataReadyHandler(reportRows: any[]){
+    console.log(`got ${reportRows.length} rows in report data ready event.`);
   }
 
   addButtnClickHandler(event){

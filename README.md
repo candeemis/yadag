@@ -195,6 +195,15 @@ Set custom aggregation function in the column object like following example:
 
 The function in the above example counts the truthy values of the corresponding cell i.e 'Active'. While aggregating, for now the size of the map is used as the value of the footer cell.
 
+### Handling Report Data Ready Event:
+When the report data is ready to be shown in the gird, `on-report-data-ready` is triggered. Which provides the report data. The event is triggered in the result of following events:
+
+1. On getting the source data
+2. On filter event
+3. On sort event
+
+To handle the event, place `(on-report-data-ready)="reportDataReadyHandler($event)"` in your `.html` file, and define `reportDataReadyHandler(reportRows: any[]){...}` in your `.ts` file.
+
 ## Please use issues section for any issues submission or submit pull requests.
 
 **Licence: MIT**

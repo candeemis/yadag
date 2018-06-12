@@ -30,6 +30,8 @@ export class GirdComponent {
 
   @Output('on-add-btn-click') onAddClickEmitter = new EventEmitter();
 
+  @Output('on-report-data-ready') onReportDataReadyEmitter = new EventEmitter();
+
   onAddBtnClickHandler = () => {
     this.onAddClickEmitter.emit('');
   }
@@ -121,7 +123,9 @@ export class GirdComponent {
     } else if (!this.enablePaging && args.length == 0) {
       this.reportRows.splice(0);
     }
+
     this.calculateSummary();
+    this.onReportDataReadyEmitter.emit(args);
   }
 
   constructor(private papa: PapaParseService) { }

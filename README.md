@@ -13,7 +13,8 @@
 * Use your own Bootstrap V4 styles for the table
 * Gird Heading
 * Show hide toolbar buttons
-* Dynamic summary row in footer, for now it contains the count of distinct values in the corresponding column.
+* Dynamic summary row in footer, by default it shows the count of distinct values of the corresponding column
+* Custom aggregation function supported
 
 **[Click here to see the live demo](https://yadag-demo.effordea.com/)**
 
@@ -175,6 +176,33 @@
             this.router.navigateByUrl('/add');
           }
 
+### Custom Aggregation Function:
+Set custom aggregation function in the column object like following example:
+
+    {
+      title: "Active",
+      dataProperty: "active",
+      visible: false,
+      dataType: ColDataType.Bool,
+      maxWidth: '30px',
+      aggregateFunc: (map: Map<string, number>, dataProperty: string, row: any) => {
+            const colVal = row[dataProperty];
+            if(colVal){
+                map.set(`${map.size}`, 1);
+            }
+        }
+    }
+
+The function in the above example counts the truthy values of the corresponding cell i.e 'Active'. While aggregating, for now the size of the map is used as the value of the footer cell.
+
+### Handling Report Data Ready Event:
+When the report data is ready to be shown in the gird, `on-report-data-ready` is triggered. Which provides the report data. The event is triggered in the result of following events:
+
+1. On getting the source data
+2. On filter event
+3. On sort event
+
+To handle the event, place `(on-report-data-ready)="reportDataReadyHandler($event)"` in your `.html` file, and define `reportDataReadyHandler(reportRows: any[]){...}` in your `.ts` file.
 
 ## Please use issues section for any issues submission or submit pull requests.
 

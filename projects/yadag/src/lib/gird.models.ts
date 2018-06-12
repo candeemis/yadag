@@ -7,6 +7,7 @@ export interface Column{
     minWidth:string;
     maxWidth:string;
     footerValue: string;
+    aggregateFunc: (map: Map<string, number>, col: string, row: any) => void;
   }
 
 export enum ColDataType{

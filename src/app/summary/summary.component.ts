@@ -49,7 +49,8 @@ export class SummaryComponent implements OnInit {
       dataProperty: "active",
       visible: false,
       dataType: ColDataType.Bool,
-      maxWidth: '30px'
+      maxWidth: '30px',
+      aggregateFunc: this.countActives
     },
     {
       title: "Message",
@@ -196,15 +197,26 @@ export class SummaryComponent implements OnInit {
 
   }
 
+  countActives(map: Map<string, number>, col: string, row: any):void {
+    const colVal = row[col];
+    if(colVal){
+      map.set(`${map.size}`, 1);
+    }
+  }
+
   onColumnClickHandler(eventData){
     if(eventData.dataProperty != 'delete'){
       return;
     }
 
-    //the object is being made invisible here, in real life execute your delete/remove logic properly.
+    // the object is being made invisible here, in real life execute your delete/remove logic properly.
     this.hiddinRows.set(eventData.id, '');
     console.log(`adding to hidden: ${eventData.id}`);
     this.populateData();
+  }
+
+  reportDataReadyHandler(reportRows: any[]){
+    console.log(`got ${reportRows.length} rows in report data ready event.`);
   }
 
   addButtnClickHandler(event){

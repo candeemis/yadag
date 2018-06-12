@@ -30,6 +30,8 @@ export class GirdComponent {
 
   @Output('on-add-btn-click') onAddClickEmitter = new EventEmitter();
 
+  @Output('on-report-data-ready') onReportDataReadyEmitter = new EventEmitter();
+
   onAddBtnClickHandler = () => {
     this.onAddClickEmitter.emit('');
   }
@@ -53,6 +55,7 @@ export class GirdComponent {
   }  
 
   private summaryColMap: Map<string, Map<string, number>>;
+  private columnMap: Map<string, Column>;
   columnsCount: number = 0;
   /**
    * Data columns
@@ -64,17 +67,18 @@ export class GirdComponent {
   set columns(args: Column[]) {
     this._columns = args;
     this.columnsCount = this._columns.length;
+    this.columnMap = new Map<string, Column>();
 
     // initialize column map for summary row
     this.summaryColMap = new Map<string, Map<string, number>>();
     args.forEach(col => {
-      // if (col.dataType === ColDataType.Button) {
-      //   return;
-      // }
       this.summaryColMap.set(col.dataProperty, new Map<string, number>());
+      if(!col.aggregateFunc){
+        col.aggregateFunc = this.countUniqueValues;
+      }
+      this.columnMap.set(col.dataProperty, col);
     });
-    
-  }
+}
 
   rowsCount: number = 0;
 
@@ -119,7 +123,9 @@ export class GirdComponent {
     } else if (!this.enablePaging && args.length == 0) {
       this.reportRows.splice(0);
     }
+
     this.calculateSummary();
+    this.onReportDataReadyEmitter.emit(args);
   }
 
   constructor(private papa: PapaParseService) { }
@@ -131,7 +137,8 @@ export class GirdComponent {
     this.reportData.forEach(row => {
 
       this.summaryColMap.forEach((map, col) => {
-        this.countUniqueValues(map, col, row);
+        const targetCol = this.columnMap.get(col);
+        targetCol.aggregateFunc(map, col, row);
       });
 
     });

@@ -38,6 +38,41 @@ export class SummaryComponent implements OnInit {
       minWidth: '100px'
     },
     {
+      title: "Email 2",
+      dataProperty: "email2",
+      visible: true,
+      dataType: ColDataType.String,
+      minWidth: '100px'
+    },
+    {
+      title: "Email 3",
+      dataProperty: "email3",
+      visible: true,
+      dataType: ColDataType.String,
+      minWidth: '100px'
+    },
+    {
+      title: "Email",
+      dataProperty: "email4",
+      visible: true,
+      dataType: ColDataType.String,
+      minWidth: '100px'
+    },
+    {
+      title: "Email",
+      dataProperty: "email5",
+      visible: true,
+      dataType: ColDataType.String,
+      minWidth: '100px'
+    },
+    {
+      title: "Email",
+      dataProperty: "email6",
+      visible: true,
+      dataType: ColDataType.String,
+      minWidth: '100px'
+    },
+    {
       title: "Date of Birth",
       dataProperty: "dob",
       visible: true,
@@ -126,6 +161,11 @@ export class SummaryComponent implements OnInit {
         firstName: u.first_name,
         lastName: u.last_name,
         email: u.email,
+        email2: u.email,
+        email3: u.email,
+        email4: u.email,
+        email5: u.email,
+        email6: u.email,
         dob: new Date(u.dob),
         active: u.active === "1",
         message: u.message,
